@@ -22,14 +22,9 @@ const THEME = createTheme({
 const IndexPage = () => {
 
   const [news, setNews] = React.useState([])
-  const localnews = sessionStorage.getItem('news');
   React.useEffect(
     () => {
-      if (!localnews) {
-        getNews()
-      } else {
-        setNews(JSON.parse(localnews))
-      }
+      getNews()
     }, []
   )
 
@@ -38,7 +33,6 @@ const IndexPage = () => {
       .then(response => response.json())
       .then(data => {
         setNews(data?.articles);
-        sessionStorage.setItem("news", JSON.stringify(data?.articles))
       })
       .catch(error => console.log(error));
   }
