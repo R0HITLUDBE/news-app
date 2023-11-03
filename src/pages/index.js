@@ -20,17 +20,46 @@ const THEME = createTheme({
 });
 
 const IndexPage = () => {
+
+  const [news, setNews] = React.useState([])
+  const localnews = sessionStorage.getItem('news');
+  React.useEffect(
+    () => {
+      if (!localnews) {
+        getNews()
+      } else {
+        setNews(JSON.parse(localnews))
+      }
+    }, []
+  )
+
+  const getNews = () => {
+    fetch(`https://newsapi.org/v2/top-headlines?country=in&category=science&apiKey=${process.env.GATSBY_API_KEY}`)
+      .then(response => response.json())
+      .then(data => {
+        setNews(data?.articles);
+        sessionStorage.setItem("news", JSON.stringify(data?.articles))
+      })
+      .catch(error => console.log(error));
+  }
+
   return (
     <ThemeProvider theme={THEME}>
-      <main className="main">
+      <React.Suspense fallback={<div></div>}>
+        <main className="main">
         <Navbar />
-        <TrendingNews />
-        <LatestNews />
-        <MostWatched />
-        <FullStory />
+          {news &&
+            <>
+              <TrendingNews news={news?.[0]} />
+              <LatestNews newss={news?.slice(1, 7)} />
+              <MostWatched newss={news?.slice(8, 12)} />
+              <FullStory newss={news?.slice(13, 18)} />
+            </>}
         <Subscribe />
         <Footer />
-      </main>
+        </main>
+      </React.Suspense>
+
     </ThemeProvider>
 
   )

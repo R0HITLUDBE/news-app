@@ -1,9 +1,11 @@
-import { Box, Card, CardContent, CardMedia, Typography, formControlClasses } from '@mui/material'
+import { Box, Card, CardContent, CardMedia, Typography, } from '@mui/material'
 import React from 'react'
 import '../styles/styles.css'
-const FullStory = () => {
 
-  const CardWidget = () => {
+
+const FullStory = ({ newss }) => {
+
+  const CardWidget = ({ news }) => {
 
     return (<Card sx={{
       height: '200px',
@@ -11,11 +13,15 @@ const FullStory = () => {
       marginBottom: '30px',
       border: 'none',
       boxShadow: 'none'
-    }}>
+    }}
+      onClick={() => {
+        window.open(news?.url)
+      }}
+    >
       <Box sx={{
         height: '60%'
       }}>
-        <CardMedia component="img" image='https://images.pexels.com/photos/1402787/pexels-photo-1402787.jpeg' sx={{
+        <CardMedia component="img" image={news?.urlToImage} sx={{
           height: '100%',
           width: '100%',
           objectFit: 'cover',
@@ -28,12 +34,16 @@ const FullStory = () => {
           fontWeight: '400',
 
         }}>
-          WeChat: Why does Elon Musk want X to emulate China's everything-app?
+          {
+            news?.title
+          }
         </Typography>
       </CardContent>
     </Card>)
   }
 
+  const oneNews = newss?.[0]
+  const list = newss?.slice(1, 5)
   return (
     <div className='fullStory'>
       <div style={{
@@ -57,11 +67,15 @@ const FullStory = () => {
             marginBottom: '30px',
             border: 'none',
             boxShadow: 'none'
-          }}>
+          }}
+            onClick={() => {
+              window.open(oneNews?.url)
+            }}
+          >
             <Box sx={{
               height: '60%'
             }}>
-              <CardMedia component="img" image='https://images.pexels.com/photos/1402787/pexels-photo-1402787.jpeg' sx={{
+              <CardMedia component="img" image={oneNews?.urlToImage} sx={{
                 height: '100%',
                 width: '100%',
                 objectFit: 'cover',
@@ -74,7 +88,7 @@ const FullStory = () => {
                 fontWeight: '400',
 
               }}>
-                WeChat: Why does Elon Musk want X to emulate China's everything-app?
+                {oneNews?.title}
               </Typography>
             </CardContent>
           </Card>
@@ -88,8 +102,8 @@ const FullStory = () => {
           }}
         >
           {
-            [1, 2, 3, 4].map((item) =>
-              <CardWidget />
+            list?.map((item) =>
+              <CardWidget news={item} />
             )
           }
         </div>

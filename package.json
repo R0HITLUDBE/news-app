@@ -19,6 +19,7 @@
     "@emotion/styled": "^11.11.0",
     "@mui/icons-material": "^5.14.16",
     "@mui/material": "^5.14.16",
+    "dayjs": "^1.11.10",
     "gatsby": "^5.12.4",
     "gatsby-plugin-manifest": "^5.12.3",
     "react": "^18.2.0",

@@ -2,22 +2,27 @@ import { Typography } from '@mui/material'
 import React from 'react'
 import '../styles/styles.css'
 
-const MostWatched = () => {
+const MostWatched = ({ newss = [] }) => {
 
-  const WatchedWidget = ({ item }) => {
+
+  const WatchedWidget = ({ num, news }) => {
+
     return (
       <div style={{
         display: 'flex',
-        width: '180px',
-        gap: '10px'
+        width: '240px',
+        gap: '10px',
+        cursor: 'pointer'
+      }} onClick={() => {
+        window.open(news?.url)
       }}>
         <Typography variant='h2' sx={{
           color: '#B80000'
-        }}>{item}</Typography>
+        }}>{num}</Typography>
         <Typography variant='body1' style={{
-          textWrap: 'balance'
+          textOverflow: 'clip'
         }}>
-          Ukraine's Motherland monument gets a makeover.
+          {news?.title}
         </Typography>
       </div>
     )
@@ -42,9 +47,9 @@ const MostWatched = () => {
         justifyContent: 'space-evenly'
       }}>
         {
-          [0, 1, 2, 3, 4].map(
-            (item) => (
-              <WatchedWidget item={item} />)
+          newss && newss?.map(
+            (item, index) => (
+              <WatchedWidget key={index + 1} num={index + 1} news={item} />)
           )
         }
       </div>

@@ -1,4 +1,4 @@
-import { Button, FilledInput, OutlinedInput, Typography } from '@mui/material'
+import { Button, OutlinedInput, Typography } from '@mui/material'
 import React from 'react'
 import Logo from '../images/news.svg'
 

@@ -1,9 +1,12 @@
 import React from 'react'
-import { Avatar, Box, Card, CardContent, CardMedia, Typography } from '@mui/material'
+import { Card, CardContent, CardMedia, Typography } from '@mui/material'
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
 import '../styles/styles.css'
+import dayjs from 'dayjs';
 
-const TrendingNews = () => {
+const TrendingNews = ({ news }) => {
+
+
   return (
     <div className='trendingNews'>
       <Card sx={{
@@ -20,7 +23,7 @@ const TrendingNews = () => {
           <CardMedia
             component="img"
             sx={{ width: '400px', objectFit: 'cover', height: '100%', borderRadius: '8px' }}
-            image="https://images.pexels.com/photos/1402787/pexels-photo-1402787.jpeg"
+            image={news?.urlToImage}
             alt="Live from space album cover"
           />
         </div>
@@ -36,23 +39,20 @@ const TrendingNews = () => {
               display: 'flex',
               alignItems: 'center',
               gap: '5px'
-            }}><Avatar src='' sx={{
-              height: '30px',
-              width: '30px'
-            }} /> Netflix</Typography>
+            }}>
+              {news?.source?.name}
+            </Typography>
             <FiberManualRecordIcon sx={{
               height: '10px'
             }} />
-            <Typography>15 minutes ago</Typography>
+            <Typography>{dayjs(news?.publishedAt).format('YYYY MMM, DD')}</Typography>
           </div>
 
           <Typography variant='h5' sx={{
             marginTop: '10px',
             textWrap: 'balance'
           }}>
-            Money Heist spin-off series Berlin:
-            Netflix release date, trailer, cast details
-            from Tudum
+            {news?.title}
           </Typography>
         </CardContent>
       </Card>

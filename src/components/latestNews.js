@@ -1,25 +1,31 @@
 import React from 'react'
-import { Avatar, Box, Card, CardContent, CardMedia, Typography } from '@mui/material'
+import { Box, Card, CardContent, CardMedia, Typography } from '@mui/material'
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
 import '../styles/styles.css'
+import dayjs from 'dayjs';
 
 
 
+const LatestNews = ({ newss }) => {
 
-const LatestNews = () => {
 
-  const CardWidget = () => {
+
+  const CardWidget = ({ news }) => {
+
     return (<Card sx={{
       height: '330px',
       width: '330px',
       marginBottom: '30px',
       border: 'none',
-      boxShadow: 'none'
-    }}>
+      boxShadow: 'none',
+      cursor: 'pointer'
+    }} onClick={() => {
+      window.open(news?.url)
+    }} >
       <Box sx={{
         height: '60%'
       }}>
-        <CardMedia component="img" image='https://images.pexels.com/photos/1402787/pexels-photo-1402787.jpeg' sx={{
+        <CardMedia component="img" image={news?.urlToImage} sx={{
           height: '100%',
           width: '100%',
           objectFit: 'cover',
@@ -39,17 +45,17 @@ const LatestNews = () => {
             gap: '5px',
             fontWeight: 'bold',
             color: '#B80000'
-          }}>Netflix</Typography>
+          }}>{news?.source?.name}</Typography>
           <FiberManualRecordIcon sx={{
             height: '10px'
           }} />
-          <Typography variant='body2'>15 minutes ago</Typography>
+          <Typography variant='body2'>{dayjs(news?.publishedAt).format('YYYY MMM, DD')}</Typography>
         </div>
         <Typography variant='body1' sx={{
           fontWeight: '600',
 
         }}>
-          WeChat: Why does Elon Musk want X to emulate China's everything-app?
+          {news?.title}
         </Typography>
       </CardContent>
     </Card>)
@@ -76,8 +82,8 @@ const LatestNews = () => {
 
       }}>
         {
-          [0, 1, 2, 3, 4, 5].map(
-            item => (<CardWidget />)
+          newss && newss?.map(
+            item => (<CardWidget news={item} />)
           )
         }
 
