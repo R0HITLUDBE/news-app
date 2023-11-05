@@ -1,11 +1,9 @@
 import { Box, Card, CardContent, CardMedia, Typography } from '@mui/material';
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
 import dayjs from 'dayjs';
 import Layout from '../components/Layout';
-const Navbar = React.lazy(() => import("../components/navbar"))
-const Subscribe = React.lazy(() => import("../components/subscribe"))
-const Footer = React.lazy(() => import("../components/footer"))
+
 
 const News = () => {
 
@@ -53,7 +51,7 @@ const CardWidget = ({ news }) => {
       height: '60%',
       width: '100%'
     }}>
-      <CardMedia component="img" image={news?.multimedia?.filter(im => im?.format == 'threeByTwoSmallAt2X')?.[0]?.url} sx={{
+      <CardMedia component="img" image={news?.multimedia?.filter(im => im?.format === 'threeByTwoSmallAt2X')?.[0]?.url} sx={{
         height: '100%',
         width: '100%',
         objectFit: 'cover !important',

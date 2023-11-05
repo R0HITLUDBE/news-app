@@ -11,7 +11,7 @@ const IndexPage = () => {
   return (
     <Layout>
       {news =>
-      (<>
+      (news && <>
               <TrendingNews news={news?.[0]} />
               <LatestNews newss={news?.slice(1, 7)} />
               <MostWatched newss={news?.slice(8, 12)} />
