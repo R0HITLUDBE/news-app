@@ -3,12 +3,11 @@ import { Box, Card, CardContent, CardMedia, Typography } from '@mui/material'
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
 import '../styles/styles.css'
 import dayjs from 'dayjs';
+import { Link } from 'gatsby';
 
 
 
 const LatestNews = ({ newss }) => {
-
-
 
   const CardWidget = ({ news }) => {
 
@@ -23,12 +22,13 @@ const LatestNews = ({ newss }) => {
       window.open(news?.url)
     }} >
       <Box sx={{
-        height: '60%'
+        height: '60%',
+        width: '100%'
       }}>
-        <CardMedia component="img" image={news?.urlToImage} sx={{
+        <CardMedia component="img" image={news?.multimedia?.filter(im => im?.format == 'threeByTwoSmallAt2X')?.[0]?.url} sx={{
           height: '100%',
           width: '100%',
-          objectFit: 'cover',
+          objectFit: 'cover !important',
           borderRadius: '4px'
         }} />
       </Box>
@@ -45,7 +45,7 @@ const LatestNews = ({ newss }) => {
             gap: '5px',
             fontWeight: 'bold',
             color: '#B80000'
-          }}>{news?.source?.name}</Typography>
+          }}>{news?.byline}</Typography>
           <FiberManualRecordIcon sx={{
             height: '10px'
           }} />
@@ -63,16 +63,18 @@ const LatestNews = ({ newss }) => {
 
   return (
     <div className='latestNews'>
-      <div style={{
-        display: 'flex',
-        justifyContent: 'space-between'
-      }}>
+      <div className='heading'>
         <Typography variant='h5' style={{
           marginBottom: '70px'
         }}>Latest News</Typography>
-        <Typography variant='subtitle2' sx={{
-          color: '#B80000'
-        }}>see more</Typography>
+        <Link to='/news' style={{
+          textDecoration: 'none'
+        }}> 
+          <Typography variant='subtitle2' sx={{
+            color: '#B80000',
+
+          }}>see more</Typography>
+        </Link>
       </div>
 
       <div style={{
@@ -83,7 +85,7 @@ const LatestNews = ({ newss }) => {
       }}>
         {
           newss && newss?.map(
-            item => (<CardWidget news={item} />)
+            (item, index) => (<CardWidget key={Math.random()} news={item} />)
           )
         }
 

@@ -1,9 +1,21 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
-
+*{
+  margin: 0;
+}
 .main{
   max-width: 1024px;
+  width: 100%;
   margin: 0 auto;
   font-family: 'Poppins', sans-serif !important;
+}
+
+.trending-card{
+    display: flex;
+    height: 260px;
+    width: 90%;
+    margin: 0 auto;
+    border: none;
+    box-shadow: none
 }
 
 .latestNews{
@@ -11,7 +23,13 @@
 }
 
 .latestNewsBody{
-  display: 'flex';
+  display: flex;
+ 
+}
+
+.heading{
+  display: flex;
+  justify-content: space-between;
  
 }
 
@@ -45,4 +63,55 @@
 }
 .trendingCard{
   display: flex;
+}
+.mw-div{
+  display: flex;
+  justify-content: space-between
+}
+.fs-ud{
+  display: flex;
+}
+
+.fs-bd{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly
+}
+
+.watchedwidget{
+  display: flex;
+  width: 240px;
+  gap: 10px;
+  cursor: pointer
+}
+
+
+
+@media (max-width: 767px){
+  .mweb-hide{
+    display: none;
+  }
+  .main{
+    margin: 0;
+  }
+  .fs-ud{
+    flex-direction: column;
+  }
+  .fs-bd{ 
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .heading{
+    width: 90%;
+    margin: 0 auto;
+  }
+  .watchedwidget{
+    width: 80%;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 10px 0;
+  }
 }

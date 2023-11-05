@@ -58,7 +58,8 @@ const Footer = () => {
   }
 
   return (
-    <div>
+    <>
+      <div className='mweb-hide'> 
       <Divider variant="middle" light={false} />
       <div style={{
         display: 'flex',
@@ -88,6 +89,19 @@ const Footer = () => {
         }
       </div>
     </div>
+      <div style={{
+        width: '100%',
+        backgroundColor: '#25242b',
+        height: 'max-content',
+        margin: '0 auto',
+        color: '#fff',
+        textAlign: 'center'
+      }}>
+        <Typography variant='body2' >
+          Created by Rohit Ludbe | Made with Gatsby
+        </Typography>
+      </div>
+    </>
   )
 }
 

@@ -1,6 +1,7 @@
 import { Box, Card, CardContent, CardMedia, Typography, } from '@mui/material'
 import React from 'react'
 import '../styles/styles.css'
+import { Link } from 'gatsby'
 
 
 const FullStory = ({ newss }) => {
@@ -12,7 +13,12 @@ const FullStory = ({ newss }) => {
       width: '250px',
       marginBottom: '30px',
       border: 'none',
-      boxShadow: 'none'
+      boxShadow: 'none',
+      '@media (max-width: 767px)': {
+        width: '90%',
+        height: 'auto',
+        marginBottom: '0px',
+      }
     }}
       onClick={() => {
         window.open(news?.url)
@@ -21,7 +27,7 @@ const FullStory = ({ newss }) => {
       <Box sx={{
         height: '60%'
       }}>
-        <CardMedia component="img" image={news?.urlToImage} sx={{
+        <CardMedia component="img" image={news?.multimedia?.filter(im => im?.format == 'threeByTwoSmallAt2X')?.[0]?.url} sx={{
           height: '100%',
           width: '100%',
           objectFit: 'cover',
@@ -48,25 +54,34 @@ const FullStory = ({ newss }) => {
     <div className='fullStory'>
       <div style={{
         display: 'flex',
-        justifyContent: 'space-between'
+        justifyContent: 'space-between',
+        width: '95%',
+        margin: '0 auto'
       }}>
         <Typography variant='h5' style={{
           marginBottom: '70px'
         }}>Full Story</Typography>
-        <Typography variant='subtitle2' sx={{
-          color: '#B80000'
-        }}>see more</Typography>
+        <Link to='/news' style={{
+          textDecoration: 'none'
+        }}> 
+          <Typography variant='subtitle2' sx={{
+            color: '#B80000',
+          }}>see more</Typography>
+        </Link>
       </div>
-      <div style={{
-        display: 'flex',
-      }}>
-        <div>
+      <div className='fs-ud'>
+        <div >
           <Card sx={{
             height: '400px',
             width: '450px',
             marginBottom: '30px',
             border: 'none',
-            boxShadow: 'none'
+            boxShadow: 'none',
+            '@media (max-width: 767px)': {
+              width: '90% !important',
+              height: 'auto',
+              margin: '0 auto'
+            }
           }}
             onClick={() => {
               window.open(oneNews?.url)
@@ -75,7 +90,7 @@ const FullStory = ({ newss }) => {
             <Box sx={{
               height: '60%'
             }}>
-              <CardMedia component="img" image={oneNews?.urlToImage} sx={{
+              <CardMedia component="img" image={oneNews?.multimedia?.[0]?.url} sx={{
                 height: '100%',
                 width: '100%',
                 objectFit: 'cover',
@@ -94,16 +109,13 @@ const FullStory = ({ newss }) => {
           </Card>
         </div>
         <div
-          style={{
-            display: 'flex',
-            flexWrap: 'wrap',
-            justifyContent: 'space-evenly',
-
-          }}
+          className='fs-bd' 
         >
           {
             list?.map((item) =>
+            (<>
               <CardWidget news={item} />
+            </>)
             )
           }
         </div>

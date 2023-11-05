@@ -9,17 +9,21 @@ import '../styles/styles.css'
 const Navbar = () => {
   return (
     <div className='navbar'>
-      <div className='navbar-left'>
+      <div style={{
+        display: 'flex'
+      }}>
         <img style={{
           width: '60px'
         }} src={Logo} alt="" />
+        <div className='navbar-left mweb-hide'>
         <Divider orientation="vertical" variant="middle" flexItem />
         <Link variant='body1' className='link-tag' href='/' underline='none'>Stories</Link>
         <Link variant='body1' className='link-tag' href='/' underline='none'>Creator</Link>
         <Link variant='body1' className='link-tag' href='/' underline='none'>Community</Link>
         <Link variant='body1' className='link-tag' href='/' underline='none'>Subscribe</Link>
       </div>
-      <div className='navbar-right'>
+      </div>
+      <div className='navbar-right mweb-hide'>
         <p style={{
           display: 'flex',
           alignItems: 'center'
