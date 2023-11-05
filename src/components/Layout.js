@@ -1,9 +1,5 @@
-import React, { useContext } from 'react'
-
+import React from 'react'
 import { ThemeProvider, createTheme } from "@mui/material";
-import { NewsContext, NewsContextData } from "../context/NewsContext";
-
-
 const Subscribe = React.lazy(() => import("../components/subscribe"))
 const Footer = React.lazy(() => import("../components/footer"))
 const Navbar = React.lazy(() => import("../components/navbar"))
@@ -31,10 +27,11 @@ const Layout = ({ children }) => {
   )
 
   const getNews = () => {
-    fetch(`https://api.nytimes.com/svc/topstories/v2/us.json?api-key=${process.env.GATSBY_API_KEY}`)
+    fetch(`https://api.nytimes.com/svc/topstories/v2/food.json?api-key=${process.env.GATSBY_API_KEY}`)
       .then(response => response.json())
       .then(data => {
-        const dataf = data?.results?.filter(news => (news?.section !== ''))
+        const dataf = data?.results?.filter(news => (news?.title !== ''))
+        console.log(dataf)
         setNews(dataf);
       })
       .catch(error => console.log(error));
@@ -42,7 +39,6 @@ const Layout = ({ children }) => {
 
 
   return (
-    <NewsContext>
       <ThemeProvider theme={THEME}>
         <main className="main">
           <Navbar />
@@ -50,8 +46,7 @@ const Layout = ({ children }) => {
           <Subscribe />
           <Footer />
         </main>
-      </ThemeProvider>
-    </NewsContext>
+    </ThemeProvider>
   )
 }
 
